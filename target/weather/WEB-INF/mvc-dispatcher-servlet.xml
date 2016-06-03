@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="com.weather.controller" />
+
+	<mvc:annotation-driven />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="cityListSingletonBean" class="java.util.ArrayList" scope="singleton">
+	<constructor-arg index="0">
+	  <list>
+        <value>Sydney</value>
+        <value>Melbourne</value>
+        <value>Wollongong</value>
+	  </list>
+	</constructor-arg>
+	</bean>
+		
+	<bean id="cityWeather" class="com.weather.model.CityWeather" scope="singleton">
+		<property name="cityList" ref="cityListSingletonBean"/>
+		<property name="onlineWeatherAPI" value="http://api.openweathermap.org/data/2.5/weather?APPID=f1ed86b3c2e7f5be4307343674225f32&amp;units=metric&amp;q="/>
+	</bean>
+</beans>
+
+
+
