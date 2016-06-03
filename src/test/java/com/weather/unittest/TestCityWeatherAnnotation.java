@@ -34,7 +34,6 @@ public class TestCityWeatherAnnotation {
 	@Test
 	public void testSydneyWeather() {		
 		String html = CityWeather.readUrl("http://localhost:8180/weather/Sydney");
-		System.out.println(html);
 		int idx = html.indexOf("<option value=\"Sydney\" selected=\"selected\">Sydney");
 		Assert.assertFalse(idx == -1);
 	}
